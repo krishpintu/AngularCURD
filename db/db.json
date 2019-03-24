@@ -1,0 +1,44 @@
+{
+    "employees": [
+      {
+        "id": 1,
+        "first_name": "Krishna",
+        "last_name": "Singh",
+        "email": "krishpintu@gmail.com",
+        "gender" : "Male",
+        "dob" : "20-Jun-1987",
+        "address" : "Telco Colony",
+        "state" : "JH",
+        "pin": "831010",
+        "phone" : "9031661991",
+        "agreement" : true
+
+      },
+      {
+        "id": 2,
+        "first_name": "Pooja",
+        "last_name": "Das",
+        "email": "poojadas09@gmail.com",
+        "gender" : "Female",
+        "dob" : "30-Sep-1991",
+        "address" : "Banglore",
+        "state" : "KA",
+        "pin": "831010",
+        "phone" : "7488438489",
+        "agreement" : true
+      },
+      {
+        "id": 3,
+        "first_name": "Praggya",
+        "last_name": "Verma",
+        "email": "praggya@gmail.com",
+        "gender" : "FeMale",
+        "dob" : "07-May-1987",
+        "address" : "Banglore",
+        "state" : "KA",
+        "pin": "828111",
+        "phone" : "7635093503",
+        "agreement" : false
+      }
+    ]
+}
