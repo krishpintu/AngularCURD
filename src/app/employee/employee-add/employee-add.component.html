@@ -1,63 +1,101 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-12">
       <h4>Employee Registration</h4>
 
-      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" >
         <div class="form-group">
           <label>First Name</label>
           <input type="text" class="form-control" formControlName="fname" />
-            <div *ngIf="f.fname.errors.required">>> required</div>
+          <div *ngIf="submitted && f.fname.errors" class="invalid-feedback">
+            <div *ngIf="f.fname.errors.required || f.fname.errors.whitespace">>> required</div>
+          </div>
         </div>
 
         <div class="form-group">
           <label>Last Name</label>
           <input type="text" class="form-control" formControlName="lname" />
+          <div *ngIf="submitted && f.lname.errors" class="invalid-feedback">
             <div *ngIf="f.lname.errors.required">>> required</div>
+          </div>
         </div>
 
         <div class="form-group">
           <label>Email</label>
           <input type="text" class="form-control" formControlName="email" />
-            <div *ngIf="f.email.errors.required">>> required</div>
-            <div *ngIf="f.email.errors.email">>> must be a valid email address</div>
+          <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+            <div *ngIf="f.email.errors?.required">>> required</div>
+            <div *ngIf="f.email.errors?.email">>> must be a valid email address</div>
+          </div>
+            
         </div>
 
         <div class="form-group">
-            <p>
-                <input type="radio" value="male"> Male
-             </p>
+             <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="gender" formControlName="gender" id="inlineRadio1" value="Male">
+              <label class="form-check-label" for="inlineRadio1">Male</label>
+              &nbsp;
+              <input class="form-check-input" type="radio" name="gender" formControlName="gender" id="inlineRadio2" value="Female">
+              <label class="form-check-label" for="inlineRadio2">Female</label>
+            </div>
+            <div *ngIf="submitted && f.gender.errors" class="invalid-feedback">
+              <div *ngIf="f.gender.errors.required">>> required</div>
+            </div>
         </div>
 
         <div class="form-group">
             <label>Date of Birth</label>
-            <input type="text" class="form-control" />
-            
+            <input type="date" class="form-control" formControlName="dob"/>
+            <div *ngIf="submitted && f.dob.errors" class="invalid-feedback">
+              <div *ngIf="f.dob.errors.required">>>Required</div>
+              <div *ngIf="f.dob.errors.pattern">>>Invalid Date</div>
+          </div>
         </div>
         <div class="form-group">
             <label>Address</label>
-            <textarea class="form-control" ></textarea>
+            <textarea class="form-control" formControlName="add"></textarea>
+            <div *ngIf="submitted && f.add.errors" class="invalid-feedback">
+              <div *ngIf="f.add.errors.required">>>Required</div>
+          </div>
         </div>
 
         <div class="form-group">
             <label>State</label>
-            <select class="form-control" ></select>
+            <select class="form-control" formControlName="state" >
+                <option value="">Choose a state</option>
+                <option *ngFor="let state of states" [value]="state.abbrev">{{state.name}}</option>
+            </select>
+            <div *ngIf="submitted && f.state.errors" class="invalid-feedback">
+                <div *ngIf="f.state.errors.required">>>Required</div>
+            </div>
         </div>
 
         <div class="form-group">
             <label>Pin</label>
             <input type="text" class="form-control" formControlName="pin"/>
-            <div *ngIf="f.pin.errors.required">>> required</div>
-            <div *ngIf="f.pin.errors.minlength">>> must be at least 6 characters</div>
+            <div *ngIf="submitted && f.pin.errors" class="invalid-feedback">
+              <div *ngIf="f.pin.errors.required">>> required</div>
+              <div *ngIf="f.pin.errors.minlength">>> must be at least 6 characters</div>
+              <div *ngIf="f.pin.errors.pattern">>> must be a numeric value</div>
+            </div>
+            
         </div>
 
         <div class="form-group">
-            <label>Phone</label>
-            <input type="text" class="form-control" />
+            <label>Mobile</label>
+            <input type="text" class="form-control" formControlName="phn"/>
+            <div *ngIf="submitted && f.phn.errors" class="invalid-feedback">
+                <div *ngIf="f.phn.errors.required">>> required</div>
+                <div *ngIf="f.phn.errors.minlength || f.phn.errors.maxlength  ">>> must be 10 characters</div>
+                <div *ngIf="f.phn.errors.pattern">>> InValid Phone No</div>
+            </div>
         </div>
 
         <div class="form-group">
-            <input type="checkbox" > <label> Accept T & C.</label>
+            <input type="checkbox" formControlName="tc"> <label> Accept T & C.</label>
+            <div *ngIf="submitted && f.tc.errors" class="invalid-feedback">
+              <div *ngIf="f.tc.errors.required">>>Required</div>
+           </div>
         </div>
 
         <div class="form-group">
@@ -65,6 +103,9 @@
         </div>
       </form>
 
+      <pre>{{registerForm.value | json }}</pre>
+      <pre>{{registerForm.valid}}</pre>
     </div>
+
   </div>
 </div>
