@@ -53,17 +53,17 @@
       "id": 4
     },
     {
-      "fname": "Krishna1",
-      "lname": "Singh1",
-      "email": "asdsad@gmail.com",
+      "fname": "Sanjeev",
+      "lname": "Sahoo",
+      "email": "sanjeev@gmail.com",
       "gender": "Male",
-      "dob": "1987-06-20",
-      "add": "Jharia",
+      "dob": "2019-04-16",
+      "add": "Telco",
       "state": "JH",
-      "pin": "1254786",
-      "phn": "9847589587",
+      "pin": "831010",
+      "phn": "1245789658",
       "tc": true,
-      "id": 1554108237509
+      "id": 1554114174878
     }
   ]
 }

@@ -14,7 +14,23 @@ export class EmployeeListComponent implements OnInit {
 
   ngOnInit() {
 
+    this.loadAllEmployees();
+  }
+
+  public loadAllEmployees(){
     this.myService.getEmployee().subscribe(res=>this.employees=res);
   }
 
+  public onEmpEdit(employee){
+    console.log('edit');
+  }
+  public onEmpDelete(employee){
+    
+    this.myService.deleteEmployee(employee).subscribe(
+      res => {
+        alert('Employee deleted successfully.');
+        this.loadAllEmployees();  
+      }
+    );
+  }
 }

@@ -26,8 +26,8 @@
           <td>{{employee.pin}}</td>
           <td>{{employee.phn}}</td>
           <td>{{employee.tc}}</td>
-          <td><button class="btn btn-success"> Edit</button></td>
-          <td><button class="btn btn-danger"> Delete</button></td>
+          <td><button class="btn btn-success" (click)="onEmpEdit(this.employee)"> Edit</button></td>
+          <td><button class="btn btn-danger" (click)="onEmpDelete(this.employee)"> Delete</button></td>
           </tr>
   </tbody>
     </table>
