@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import {MyServiceService } from '../../services/my-service.service';
+
 @Component({
   selector: 'app-employee-list',
   templateUrl: './employee-list.component.html',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EmployeeListComponent implements OnInit {
 
-  constructor() { }
+  employees = [];
+  constructor( private myService:MyServiceService) { }
 
   ngOnInit() {
+
+    this.myService.getEmployee().subscribe(res=>this.employees=res);
   }
 
 }

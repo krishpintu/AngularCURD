@@ -10,6 +10,8 @@ import { HeaderComponent } from './header/header.component';
 import { EmployeeListComponent } from './employee/employee-list/employee-list.component';
 import { EmployeeAddComponent } from './employee/employee-add/employee-add.component';
 
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +23,8 @@ import { EmployeeAddComponent } from './employee/employee-add/employee-add.compo
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

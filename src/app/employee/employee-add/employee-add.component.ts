@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators ,FormControl } from '@angular/forms'
 
 import { noWhitespaceValidator , ValidateUrl  } from '../../shared/app.validators'; //custom validator
 
+import { MyServiceService } from '../../services/my-service.service';
+
 @Component({
   selector: 'app-employee-add',
   templateUrl: './employee-add.component.html',
@@ -19,7 +21,7 @@ export class EmployeeAddComponent implements OnInit {
   ];
 
 
-  constructor(private frmBuilder : FormBuilder) { 
+  constructor(private frmBuilder : FormBuilder , private myService:MyServiceService) { 
 
   }
 
@@ -59,9 +61,13 @@ export class EmployeeAddComponent implements OnInit {
       return;
     }
     console.log('fname=' + this.f.fname.value);
-    console.log('lname=' + this.f.lname.value);
-    console.log('email=' + this.f.email.value);
-    console.log('pin=' + this.f.pin.value);
+
+    let empdata =this.registerForm.value;
+    empdata["id"]=new Date().getTime();
+    this.myService.createEmployee(empdata).subscribe( data => {
+      alert("Employee created successfully.");
+      console.log(data);
+    });
   }
 
 }
