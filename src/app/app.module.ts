@@ -12,6 +12,8 @@ import { EmployeeAddComponent } from './employee/employee-add/employee-add.compo
 
 import { HttpClientModule } from '@angular/common/http';
 
+import {EventEmitterService} from './services/event-emitter.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +28,7 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [EventEmitterService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
