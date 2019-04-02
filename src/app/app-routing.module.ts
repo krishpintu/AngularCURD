@@ -9,6 +9,7 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'ng-curd', component: HomeComponent },
   { path: 'addemployee', component: EmployeeAddComponent },
+  { path: 'editemployee/:id', component: EmployeeAddComponent },
   { path: 'employees', component: EmployeeListComponent }
 ];
 

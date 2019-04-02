@@ -5,7 +5,7 @@ import { noWhitespaceValidator , ValidateUrl  } from '../../shared/app.validator
 
 import { MyServiceService } from '../../services/my-service.service';
 
-import { EventEmitterService } from '../../services/event-emitter.service'; 
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-employee-add',
@@ -23,11 +23,15 @@ export class EmployeeAddComponent implements OnInit {
   ];
   employeeIdUpdate = null;  
 
-  constructor(private frmBuilder : FormBuilder , private myService:MyServiceService ,private eventEmitterService:EventEmitterService) { 
+  buttonText='Register';
+
+  constructor(private frmBuilder : FormBuilder , private myService:MyServiceService,private _router :ActivatedRoute ) { 
 
   }
 
   ngOnInit() {
+
+  
 
     this.registerForm =this.frmBuilder.group(
       {
@@ -44,16 +48,12 @@ export class EmployeeAddComponent implements OnInit {
       }
     );
 
-    //implement for receive method call from another component using service
-    
-    if (this.eventEmitterService.subsVar==undefined) {    
-        this.eventEmitterService.subsVar = this.eventEmitterService.invokeAddEmpFunction.subscribe((id) => {    
-        this.loadEmpData(id); 
-        this.registerForm.get("fname").patchValue('selected.id');
-      })    
-    }  
-    
-    //
+    this._router.paramMap.subscribe(params=>{
+      const empId = params.get('id');
+      if(empId){
+        this.loadEmpData(empId);
+      }
+    });
 
   }
 
@@ -62,13 +62,7 @@ export class EmployeeAddComponent implements OnInit {
     return this.registerForm.controls;
   }
 
-  /*noWhitespaceValidator(control: FormControl) {
-    const isWhitespace = (control.value || '').trim().length === 0;
-    const isValid = !isWhitespace;
-    return isValid ? null : { 'whitespace': true };
-  }*/
 
-  
   onSubmit() {
     this.submitted = true;
     if (this.registerForm.invalid) {
@@ -99,23 +93,26 @@ export class EmployeeAddComponent implements OnInit {
     
   }
 
-  public loadEmpData(id){
-    alert(id);
-    this.myService.getEmployeeById(id).subscribe(employee=> {   
+  public loadEmpData(empId){
+    this.myService.getEmployeeById(empId).subscribe(employee=> {
       this.employeeIdUpdate = employee.id; 
+      this.registerForm.patchValue({
+          fname: employee.fname,
+          lname : employee.lname,
+          email: employee.email,
+          gender: employee.gender,
+          dob: employee.dob,
+          add: employee.add,
+          state: employee.state,
+          pin: employee.pin,
+          phn :employee.phn,
+          tc: employee.tc
+      });
+      this.buttonText='Save Data';
+  });
       
-      this.registerForm.controls['fname'].setValue(employee.fname);  
-      this.registerForm.controls['lname'].setValue(employee.lname);  
-      this.registerForm.controls['email'].setValue(employee.email);  
-      this.registerForm.controls['gender'].setValue(employee.gender);  
-      this.registerForm.controls['dob'].setValue(employee.dob);  
-      this.registerForm.controls['add'].setValue(employee.add);  
-      this.registerForm.controls['state'].setValue(employee.state);  
-      this.registerForm.controls['pin'].setValue(employee.pin);  
-      this.registerForm.controls['phn'].setValue(employee.phn);  
-      this.registerForm.controls['tc'].setValue(employee.tc);  
-   
-    });
+      
+
    
     
   }
